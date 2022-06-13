@@ -28,19 +28,19 @@ namespace MapAssist.Helpers
             [Area.KurastCauseway] = Area.Travincal,
         };
 
-        private static readonly Dictionary<Area, Area> AreaPreferredQuestArea = new Dictionary<Area, Area>()
+        private static readonly Dictionary<Area, Area[]> AreaPreferredQuestArea = new Dictionary<Area, Area[]>()
         {
-            [Area.BloodMoor] = Area.DenOfEvil,
-            [Area.ColdPlains] = Area.BurialGrounds,
-            [Area.BlackMarsh] = Area.ForgottenTower,
-            [Area.TamoeHighland] = Area.PitLevel1,
-            [Area.DryHills] = Area.HallsOfTheDeadLevel1,
-            [Area.FarOasis] = Area.MaggotLairLevel1,
-            [Area.LostCity] = Area.ValleyOfSnakes,
-            [Area.SpiderForest] = Area.SpiderCavern,
-            [Area.FlayerJungle] = Area.FlayerDungeonLevel1,
-            [Area.KurastBazaar] = Area.SewersLevel1Act3,
-            [Area.CrystallinePassage] = Area.FrozenRiver,
+            [Area.BloodMoor] = new[] { Area.DenOfEvil },
+            [Area.ColdPlains] = new[] { Area.BurialGrounds },
+            [Area.BlackMarsh] = new[] { Area.ForgottenTower },
+            [Area.TamoeHighland] = new[] { Area.PitLevel1 },
+            [Area.DryHills] = new[] { Area.HallsOfTheDeadLevel1 },
+            [Area.FarOasis] = new[] { Area.MaggotLairLevel1 },
+            [Area.LostCity] = new[] { Area.ValleyOfSnakes },
+            [Area.SpiderForest] = new[] { Area.SpiderCavern },
+            [Area.FlayerJungle] = new[] { Area.FlayerDungeonLevel1 },
+            [Area.KurastBazaar] = new[] { Area.SewersLevel1Act3, Area.RuinedTemple },
+            [Area.CrystallinePassage] = new[] { Area.FrozenRiver },
         };
 
         private static readonly Dictionary<Area, Dictionary<GameObject, Area>> AreaPortals = new Dictionary<Area, Dictionary<GameObject, Area>>()
@@ -57,29 +57,6 @@ namespace MapAssist.Helpers
             {
                 [GameObject.PermanentTownPortal] = Area.InfernalPit,
             },
-        };
-
-        private static readonly HashSet<GameObject> SuperChests = new HashSet<GameObject>
-        {
-            GameObject.GoodChest,
-            GameObject.SparklyChest,
-            GameObject.ArcaneLargeChestLeft,
-            GameObject.ArcaneLargeChestRight,
-            GameObject.ArcaneSmallChestLeft,
-            GameObject.ArcaneSmallChestRight,
-            GameObject.ExpansionSpecialChest,
-        };
-
-        private static readonly HashSet<GameObject> ArmorWeapRacks = new HashSet<GameObject>
-        {
-            GameObject.ExpansionArmorStandRight,
-            GameObject.ExpansionArmorStandLeft,
-            GameObject.ArmorStandRight,
-            GameObject.ArmorStandLeft,
-            GameObject.ExpansionWeaponRackRight,
-            GameObject.ExpansionWeaponRackLeft,
-            GameObject.WeaponRackRight,
-            GameObject.WeaponRackLeft,
         };
 
         private static readonly HashSet<GameObject> Shrines = new HashSet<GameObject>
@@ -144,6 +121,7 @@ namespace MapAssist.Helpers
                 [GameObject.KhalimChest1] = Items.GetItemNameFromKey("qhr"),
                 [GameObject.KhalimChest2] = Items.GetItemNameFromKey("qbr"),
                 [GameObject.KhalimChest3] = Items.GetItemNameFromKey("qey"),
+                [GameObject.LamEsensTome] = Items.GetItemNameFromKey("bbb"),
                 [GameObject.GidbinnAltarDecoy] = Items.GetItemNameFromKey("gidbinn"),
                 [GameObject.HellForge] = Items.GetItemNameFromKey("Hellforge"),
                 [GameObject.DrehyaWildernessStartPosition] = AreaExtensions.NameFromKey("Drehya"), //anya
@@ -365,21 +343,24 @@ namespace MapAssist.Helpers
                 }
 
                 // Quest Area Point of Interest
-                if (AreaPreferredQuestArea.TryGetValue(areaData.Area, out var questArea))
+                if (AreaPreferredQuestArea.TryGetValue(areaData.Area, out var questAreas))
                 {
-                    var questLevel = areaData.AdjacentLevels[questArea];
-                    if (questLevel.Exits.Any())
+                    foreach (var questArea in questAreas)
                     {
-                        pointsOfInterest.Add(new PointOfInterest
+                        var questLevel = areaData.AdjacentLevels[questArea];
+                        if (questLevel.Exits.Any())
                         {
-                            Area = areaData.Area,
-                            NextArea = questArea,
-                            Label = questArea.MapLabel(gameData.Difficulty),
-                            Position = questLevel.Exits[0],
-                            RenderingSettings = MapAssistConfiguration.Loaded.MapConfiguration.Quest,
-                            Type = PoiType.Quest
-                        });
-                        areaRenderDecided.Add(questArea);
+                            pointsOfInterest.Add(new PointOfInterest
+                            {
+                                Area = areaData.Area,
+                                NextArea = questArea,
+                                Label = questArea.MapLabel(gameData.Difficulty),
+                                Position = questLevel.Exits[0],
+                                RenderingSettings = MapAssistConfiguration.Loaded.MapConfiguration.Quest,
+                                Type = PoiType.Quest
+                            });
+                            areaRenderDecided.Add(questArea);
+                        }
                     }
                 }
 
@@ -495,7 +476,7 @@ namespace MapAssist.Helpers
                             Area = areaData.Area,
                             Label = AreaPortals[areaData.Area][obj].PortalLabel(gameData.Difficulty),
                             Position = points[0],
-                            RenderingSettings = MapAssistConfiguration.Loaded.MapConfiguration.Portal,
+                            RenderingSettings = MapAssistConfiguration.Loaded.MapConfiguration.GamePortal,
                             Type = PoiType.AreaPortal
                         });
                     }
@@ -546,7 +527,7 @@ namespace MapAssist.Helpers
                     }
                 }
                 // Super Chest
-                else if (SuperChests.Contains(obj))
+                else if (Chest.SuperChests.Contains(obj))
                 {
                     foreach (var point in points)
                     {
@@ -557,21 +538,6 @@ namespace MapAssist.Helpers
                             Position = point,
                             RenderingSettings = MapAssistConfiguration.Loaded.MapConfiguration.SuperChest,
                             Type = PoiType.SuperChest
-                        });
-                    }
-                }
-                // Armor Stands & Weapon Racks
-                else if (ArmorWeapRacks.Contains(obj))
-                {
-                    foreach (var point in points)
-                    {
-                        pointsOfInterest.Add(new PointOfInterest
-                        {
-                            Area = areaData.Area,
-                            Label = obj.ToString(),
-                            Position = point,
-                            RenderingSettings = MapAssistConfiguration.Loaded.MapConfiguration.ArmorWeapRack,
-                            Type = PoiType.ArmorWeapRack
                         });
                     }
                 }
