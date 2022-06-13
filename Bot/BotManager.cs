@@ -53,8 +53,8 @@ namespace MapAssist.Bot
         private static void checkLife(GameData gameData)
         {
             var now = DateTime.Now.Ticks;
-            //if (now - lastCheckTime < TimeSpan.TicksPerMillisecond * 100)
-            if (now - lastCheckTime < TimeSpan.TicksPerSecond)
+            if (now - lastCheckTime < TimeSpan.TicksPerMillisecond * 100)
+            //if (now - lastCheckTime < TimeSpan.TicksPerSecond)
                 return;
 
             lastCheckTime = now;

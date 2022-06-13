@@ -6,6 +6,7 @@ namespace MapAssist.Helpers
 {
     public static class WindowsExternal
     {
+        [StructLayout(LayoutKind.Sequential)]
         public struct Rect
         {
             public int Left { get; set; }
@@ -22,6 +23,13 @@ namespace MapAssist.Helpers
             {
                 get { return Bottom - Top; }
             }
+        }
+
+        [StructLayout(LayoutKind.Sequential)]
+        public struct Point
+        {
+            public int x;
+            public int y;
         }
 
         [DllImport("kernel32.dll", SetLastError = true)]
@@ -126,7 +134,9 @@ namespace MapAssist.Helpers
         //This is a replacement for Cursor.Position in WinForms
         [DllImport("user32.dll")]
         static extern bool SetCursorPos(int x, int y);
-
+        [DllImport("user32.dll")]
+        static extern bool GetCursorPos(ref Point p);
+        
         [DllImport("user32.dll")]
         public static extern void mouse_event(int dwFlags, int dx, int dy, int cButtons, int dwExtraInfo);
 
@@ -148,9 +158,12 @@ namespace MapAssist.Helpers
         public const int MOUSEEVENTF_LEFTUP = 0x04;
         public static void LeftMouseClick(int xpos, int ypos)
         {
+            //var p = new Point();
+            //GetCursorPos(ref p);
             SetCursorPos(xpos, ypos);
             mouse_event(MOUSEEVENTF_LEFTDOWN, xpos, ypos, 0, 0);
             mouse_event(MOUSEEVENTF_LEFTUP, xpos, ypos, 0, 0);
+            //SetCursorPos(p.x, p.y);
         }
     }
 }
