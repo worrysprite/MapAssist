@@ -12,6 +12,7 @@ using System.Runtime.InteropServices;
 using System.Threading;
 using System.Windows.Forms;
 using YamlDotNet.Core;
+using MapAssist.Bot;
 
 namespace MapAssist
 {
@@ -154,6 +155,7 @@ namespace MapAssist
                 };
 
                 GameManager.MonitorForegroundWindow();
+                BotManager.Start();
 
                 Application.Run();
             }
@@ -294,6 +296,9 @@ namespace MapAssist
 
             overlay.Dispose();
             _log.Info("Disposed Overlay");
+
+            BotManager.Dispose();
+            _log.Info("Disposed BotManager");
 
             GameManager.Dispose();
             _log.Info("Disposed GameManager");

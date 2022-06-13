@@ -97,5 +97,12 @@ namespace MapAssist.Helpers
 
         [DllImport("user32.dll", SetLastError = true)]
         public static extern uint GetWindowThreadProcessId(IntPtr hWnd, out uint processId);
+
+        [System.Runtime.InteropServices.DllImport("user32.dll")]
+        public static extern bool PostMessage(IntPtr hWnd, uint Msg, int wParam, int lParam);
+
+        const uint WM_KEYDOWN = 0x0100;
+        const int VK_ESCAPE = 0x1B;
+        public static void SendEscapeKey(IntPtr hWnd) => PostMessage(hWnd, WM_KEYDOWN, VK_ESCAPE, 0);
     }
 }

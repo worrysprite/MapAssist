@@ -167,6 +167,9 @@ namespace MapAssist
             btnCraftedColor.ForeColor = ContrastTextColor(btnCraftedColor.BackColor);
             btnClearCraftedColor.Visible = MapAssistConfiguration.Loaded.ItemLog.CraftedColor != MapAssistConfiguration.Default.ItemLog.CraftedColor;
 
+            lifeProtect.Value = MapAssistConfiguration.Loaded.LifeProtect;
+            lbLifeProtect.Text = lifeProtect.Value.ToString() + "%";
+
             if (MapAssistConfiguration.Loaded.MapColorConfiguration.Walkable != null)
             {
                 var color = (Color)MapAssistConfiguration.Loaded.MapColorConfiguration.Walkable;
@@ -1216,6 +1219,12 @@ namespace MapAssist
         private void chkDPIAware_CheckedChanged(object sender, EventArgs e)
         {
             MapAssistConfiguration.Loaded.DPIAware = chkDPIAware.Checked;
+        }
+
+        private void lifeProtect_Scroll(object sender, EventArgs e)
+        {
+            MapAssistConfiguration.Loaded.LifeProtect = lifeProtect.Value;
+            lbLifeProtect.Text = lifeProtect.Value.ToString() + "%";
         }
 
         private List<Color> customColors = new List<Color>();

@@ -59,6 +59,9 @@ namespace MapAssist.Settings
 
         [YamlMember(Alias = "DPIAware", ApplyNamingConventions = false)]
         public bool DPIAware { get; set; }
+
+        [YamlMember(Alias = "LifeProtect", ApplyNamingConventions = false)]
+        public int LifeProtect { get; set; }
     }
 
     public class MapColorConfiguration
