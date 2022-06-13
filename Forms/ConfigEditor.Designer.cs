@@ -30,12 +30,14 @@
         {
 			System.Windows.Forms.GroupBox groupBox10;
 			System.Windows.Forms.Label label7;
+			System.Windows.Forms.GroupBox groupBox5;
+			System.Windows.Forms.Label label11;
 			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ConfigEditor));
+			this.lbLifeProtect = new System.Windows.Forms.Label();
+			this.lifeProtect = new System.Windows.Forms.TrackBar();
 			this.tabControl1 = new System.Windows.Forms.TabControl();
 			this.tabPage5 = new System.Windows.Forms.TabPage();
-			this.groupBox5 = new System.Windows.Forms.GroupBox();
 			this.cboLanguage = new System.Windows.Forms.ComboBox();
-			this.label11 = new System.Windows.Forms.Label();
 			this.groupBox4 = new System.Windows.Forms.GroupBox();
 			this.txtD2Path = new System.Windows.Forms.TextBox();
 			this.btnBrowseD2Location = new System.Windows.Forms.Button();
@@ -196,6 +198,9 @@
 			this.label12 = new System.Windows.Forms.Label();
 			this.label22 = new System.Windows.Forms.Label();
 			this.tabPage4 = new System.Windows.Forms.TabPage();
+			this.groupBox8 = new System.Windows.Forms.GroupBox();
+			this.label3 = new System.Windows.Forms.Label();
+			this.chkDPIAware = new System.Windows.Forms.CheckBox();
 			this.groupBox2 = new System.Windows.Forms.GroupBox();
 			this.btnRemoveHidden = new System.Windows.Forms.Button();
 			this.btnAddHidden = new System.Windows.Forms.Button();
@@ -211,16 +216,15 @@
 			this.label6 = new System.Windows.Forms.Label();
 			this.linkWebsite = new System.Windows.Forms.LinkLabel();
 			this.pictureBox1 = new System.Windows.Forms.PictureBox();
-			this.groupBox8 = new System.Windows.Forms.GroupBox();
-			this.label3 = new System.Windows.Forms.Label();
-			this.chkDPIAware = new System.Windows.Forms.CheckBox();
-			this.lbLifeProtect = new System.Windows.Forms.Label();
-			this.lifeProtect = new System.Windows.Forms.TrackBar();
 			groupBox10 = new System.Windows.Forms.GroupBox();
 			label7 = new System.Windows.Forms.Label();
+			groupBox5 = new System.Windows.Forms.GroupBox();
+			label11 = new System.Windows.Forms.Label();
+			groupBox10.SuspendLayout();
+			((System.ComponentModel.ISupportInitialize)(this.lifeProtect)).BeginInit();
 			this.tabControl1.SuspendLayout();
 			this.tabPage5.SuspendLayout();
-			this.groupBox5.SuspendLayout();
+			groupBox5.SuspendLayout();
 			this.groupBox4.SuspendLayout();
 			this.grpGameInfo.SuspendLayout();
 			this.tabPage1.SuspendLayout();
@@ -251,14 +255,65 @@
 			this.tabPage7.SuspendLayout();
 			this.grpHotkeys.SuspendLayout();
 			this.tabPage4.SuspendLayout();
+			this.groupBox8.SuspendLayout();
 			this.groupBox2.SuspendLayout();
 			this.groupBoxAuthorizedWindowTitle.SuspendLayout();
 			this.groupBox9.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
-			this.groupBox8.SuspendLayout();
-			groupBox10.SuspendLayout();
-			((System.ComponentModel.ISupportInitialize)(this.lifeProtect)).BeginInit();
 			this.SuspendLayout();
+			// 
+			// groupBox10
+			// 
+			groupBox10.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+			groupBox10.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+			groupBox10.Controls.Add(this.lbLifeProtect);
+			groupBox10.Controls.Add(label7);
+			groupBox10.Controls.Add(this.lifeProtect);
+			groupBox10.Location = new System.Drawing.Point(11, 217);
+			groupBox10.Name = "groupBox10";
+			groupBox10.Size = new System.Drawing.Size(393, 50);
+			groupBox10.TabIndex = 31;
+			groupBox10.TabStop = false;
+			groupBox10.Text = "Life Protect";
+			// 
+			// lbLifeProtect
+			// 
+			this.lbLifeProtect.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+			this.lbLifeProtect.AutoSize = true;
+			this.lbLifeProtect.BackColor = System.Drawing.Color.Transparent;
+			this.lbLifeProtect.Location = new System.Drawing.Point(345, 23);
+			this.lbLifeProtect.Name = "lbLifeProtect";
+			this.lbLifeProtect.Size = new System.Drawing.Size(23, 12);
+			this.lbLifeProtect.TabIndex = 24;
+			this.lbLifeProtect.Text = "35%";
+			this.lbLifeProtect.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+			// 
+			// label7
+			// 
+			label7.AutoSize = true;
+			label7.BackColor = System.Drawing.Color.Transparent;
+			label7.Location = new System.Drawing.Point(15, 23);
+			label7.Name = "label7";
+			label7.Size = new System.Drawing.Size(47, 12);
+			label7.TabIndex = 16;
+			label7.Text = "Percent";
+			// 
+			// lifeProtect
+			// 
+			this.lifeProtect.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+			this.lifeProtect.AutoSize = false;
+			this.lifeProtect.BackColor = System.Drawing.Color.White;
+			this.lifeProtect.LargeChange = 1;
+			this.lifeProtect.Location = new System.Drawing.Point(68, 19);
+			this.lifeProtect.Maximum = 99;
+			this.lifeProtect.Minimum = 1;
+			this.lifeProtect.Name = "lifeProtect";
+			this.lifeProtect.Size = new System.Drawing.Size(271, 25);
+			this.lifeProtect.TabIndex = 0;
+			this.lifeProtect.Value = 35;
+			this.lifeProtect.Scroll += new System.EventHandler(this.lifeProtect_Scroll);
 			// 
 			// tabControl1
 			// 
@@ -282,7 +337,7 @@
 			// tabPage5
 			// 
 			this.tabPage5.Controls.Add(groupBox10);
-			this.tabPage5.Controls.Add(this.groupBox5);
+			this.tabPage5.Controls.Add(groupBox5);
 			this.tabPage5.Controls.Add(this.groupBox4);
 			this.tabPage5.Controls.Add(this.grpGameInfo);
 			this.tabPage5.Location = new System.Drawing.Point(4, 22);
@@ -294,18 +349,18 @@
 			// 
 			// groupBox5
 			// 
-			this.groupBox5.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+			groupBox5.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-			this.groupBox5.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-			this.groupBox5.Controls.Add(this.cboLanguage);
-			this.groupBox5.Controls.Add(this.label11);
-			this.groupBox5.Location = new System.Drawing.Point(11, 277);
-			this.groupBox5.Name = "groupBox5";
-			this.groupBox5.Size = new System.Drawing.Size(393, 59);
-			this.groupBox5.TabIndex = 25;
-			this.groupBox5.TabStop = false;
-			this.groupBox5.Text = "Translation";
+			groupBox5.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+			groupBox5.Controls.Add(this.cboLanguage);
+			groupBox5.Controls.Add(label11);
+			groupBox5.Location = new System.Drawing.Point(11, 277);
+			groupBox5.Name = "groupBox5";
+			groupBox5.Size = new System.Drawing.Size(393, 59);
+			groupBox5.TabIndex = 25;
+			groupBox5.TabStop = false;
+			groupBox5.Text = "Translation";
 			// 
 			// cboLanguage
 			// 
@@ -319,12 +374,12 @@
 			// 
 			// label11
 			// 
-			this.label11.AutoSize = true;
-			this.label11.Location = new System.Drawing.Point(7, 23);
-			this.label11.Name = "label11";
-			this.label11.Size = new System.Drawing.Size(53, 12);
-			this.label11.TabIndex = 13;
-			this.label11.Text = "Language";
+			label11.AutoSize = true;
+			label11.Location = new System.Drawing.Point(7, 23);
+			label11.Name = "label11";
+			label11.Size = new System.Drawing.Size(53, 12);
+			label11.TabIndex = 13;
+			label11.Text = "Language";
 			// 
 			// groupBox4
 			// 
@@ -1473,7 +1528,7 @@
 			this.tabLabel.Location = new System.Drawing.Point(4, 22);
 			this.tabLabel.Name = "tabLabel";
 			this.tabLabel.Padding = new System.Windows.Forms.Padding(3);
-			this.tabLabel.Size = new System.Drawing.Size(389, 228);
+			this.tabLabel.Size = new System.Drawing.Size(389, 239);
 			this.tabLabel.TabIndex = 1;
 			this.tabLabel.Text = "Label";
 			this.tabLabel.UseVisualStyleBackColor = true;
@@ -1551,7 +1606,7 @@
 			this.tabLine.Controls.Add(this.btnLineColor);
 			this.tabLine.Location = new System.Drawing.Point(4, 22);
 			this.tabLine.Name = "tabLine";
-			this.tabLine.Size = new System.Drawing.Size(389, 228);
+			this.tabLine.Size = new System.Drawing.Size(389, 239);
 			this.tabLine.TabIndex = 2;
 			this.tabLine.Text = "Line";
 			this.tabLine.UseVisualStyleBackColor = true;
@@ -2306,6 +2361,41 @@
 			this.tabPage4.Text = "Advanced";
 			this.tabPage4.UseVisualStyleBackColor = true;
 			// 
+			// groupBox8
+			// 
+			this.groupBox8.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+			this.groupBox8.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+			this.groupBox8.Controls.Add(this.label3);
+			this.groupBox8.Controls.Add(this.chkDPIAware);
+			this.groupBox8.Location = new System.Drawing.Point(11, 224);
+			this.groupBox8.Name = "groupBox8";
+			this.groupBox8.Size = new System.Drawing.Size(393, 54);
+			this.groupBox8.TabIndex = 31;
+			this.groupBox8.TabStop = false;
+			this.groupBox8.Text = "High DPI";
+			// 
+			// label3
+			// 
+			this.label3.AutoSize = true;
+			this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 7F);
+			this.label3.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
+			this.label3.Location = new System.Drawing.Point(7, 33);
+			this.label3.Name = "label3";
+			this.label3.Size = new System.Drawing.Size(80, 13);
+			this.label3.TabIndex = 28;
+			this.label3.Text = "Requires restart";
+			// 
+			// chkDPIAware
+			// 
+			this.chkDPIAware.AutoSize = true;
+			this.chkDPIAware.Location = new System.Drawing.Point(10, 18);
+			this.chkDPIAware.Name = "chkDPIAware";
+			this.chkDPIAware.Size = new System.Drawing.Size(102, 16);
+			this.chkDPIAware.TabIndex = 0;
+			this.chkDPIAware.Text = "DPI Awareness";
+			this.chkDPIAware.UseVisualStyleBackColor = true;
+			// 
 			// groupBox2
 			// 
 			this.groupBox2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
@@ -2465,93 +2555,6 @@
 			this.pictureBox1.TabIndex = 6;
 			this.pictureBox1.TabStop = false;
 			// 
-			// groupBox8
-			// 
-			this.groupBox8.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-			this.groupBox8.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-			this.groupBox8.Controls.Add(this.label3);
-			this.groupBox8.Controls.Add(this.chkDPIAware);
-			this.groupBox8.Location = new System.Drawing.Point(11, 224);
-			this.groupBox8.Name = "groupBox8";
-			this.groupBox8.Size = new System.Drawing.Size(393, 54);
-			this.groupBox8.TabIndex = 31;
-			this.groupBox8.TabStop = false;
-			this.groupBox8.Text = "High DPI";
-			// 
-			// label3
-			// 
-			this.label3.AutoSize = true;
-			this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 7F);
-			this.label3.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
-			this.label3.Location = new System.Drawing.Point(7, 33);
-			this.label3.Name = "label3";
-			this.label3.Size = new System.Drawing.Size(80, 13);
-			this.label3.TabIndex = 28;
-			this.label3.Text = "Requires restart";
-			// 
-			// chkDPIAware
-			// 
-			this.chkDPIAware.AutoSize = true;
-			this.chkDPIAware.Location = new System.Drawing.Point(10, 18);
-			this.chkDPIAware.Name = "chkDPIAware";
-			this.chkDPIAware.Size = new System.Drawing.Size(102, 16);
-			this.chkDPIAware.TabIndex = 0;
-			this.chkDPIAware.Text = "DPI Awareness";
-			this.chkDPIAware.UseVisualStyleBackColor = true;
-			// 
-			// groupBox10
-			// 
-			groupBox10.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-			groupBox10.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-			groupBox10.Controls.Add(this.lbLifeProtect);
-			groupBox10.Controls.Add(label7);
-			groupBox10.Controls.Add(this.lifeProtect);
-			groupBox10.Location = new System.Drawing.Point(11, 217);
-			groupBox10.Name = "groupBox10";
-			groupBox10.Size = new System.Drawing.Size(393, 50);
-			groupBox10.TabIndex = 31;
-			groupBox10.TabStop = false;
-			groupBox10.Text = "Life Protect";
-			// 
-			// lbLifeProtect
-			// 
-			this.lbLifeProtect.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-			this.lbLifeProtect.AutoSize = true;
-			this.lbLifeProtect.BackColor = System.Drawing.Color.Transparent;
-			this.lbLifeProtect.Location = new System.Drawing.Point(345, 23);
-			this.lbLifeProtect.Name = "lbLifeProtect";
-			this.lbLifeProtect.Size = new System.Drawing.Size(23, 12);
-			this.lbLifeProtect.TabIndex = 24;
-			this.lbLifeProtect.Text = "35%";
-			this.lbLifeProtect.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-			// 
-			// label7
-			// 
-			label7.AutoSize = true;
-			label7.BackColor = System.Drawing.Color.Transparent;
-			label7.Location = new System.Drawing.Point(15, 23);
-			label7.Name = "label7";
-			label7.Size = new System.Drawing.Size(47, 12);
-			label7.TabIndex = 16;
-			label7.Text = "Percent";
-			// 
-			// lifeProtect
-			// 
-			this.lifeProtect.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-			this.lifeProtect.AutoSize = false;
-			this.lifeProtect.BackColor = System.Drawing.Color.White;
-			this.lifeProtect.LargeChange = 1;
-			this.lifeProtect.Location = new System.Drawing.Point(68, 19);
-			this.lifeProtect.Maximum = 99;
-			this.lifeProtect.Minimum = 1;
-			this.lifeProtect.Name = "lifeProtect";
-			this.lifeProtect.Size = new System.Drawing.Size(271, 25);
-			this.lifeProtect.TabIndex = 0;
-			this.lifeProtect.Value = 35;
-			// 
 			// ConfigEditor
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -2569,10 +2572,13 @@
 			this.Text = "MapAssist - Configuration";
 			this.TopMost = true;
 			this.Shown += new System.EventHandler(this.ConfigEditor_Shown);
+			groupBox10.ResumeLayout(false);
+			groupBox10.PerformLayout();
+			((System.ComponentModel.ISupportInitialize)(this.lifeProtect)).EndInit();
 			this.tabControl1.ResumeLayout(false);
 			this.tabPage5.ResumeLayout(false);
-			this.groupBox5.ResumeLayout(false);
-			this.groupBox5.PerformLayout();
+			groupBox5.ResumeLayout(false);
+			groupBox5.PerformLayout();
 			this.groupBox4.ResumeLayout(false);
 			this.groupBox4.PerformLayout();
 			this.grpGameInfo.ResumeLayout(false);
@@ -2615,16 +2621,13 @@
 			this.grpHotkeys.ResumeLayout(false);
 			this.grpHotkeys.PerformLayout();
 			this.tabPage4.ResumeLayout(false);
+			this.groupBox8.ResumeLayout(false);
+			this.groupBox8.PerformLayout();
 			this.groupBox2.ResumeLayout(false);
 			this.groupBoxAuthorizedWindowTitle.ResumeLayout(false);
 			this.groupBoxAuthorizedWindowTitle.PerformLayout();
 			this.groupBox9.ResumeLayout(false);
 			((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
-			this.groupBox8.ResumeLayout(false);
-			this.groupBox8.PerformLayout();
-			groupBox10.ResumeLayout(false);
-			groupBox10.PerformLayout();
-			((System.ComponentModel.ISupportInitialize)(this.lifeProtect)).EndInit();
 			this.ResumeLayout(false);
 
         }
@@ -2703,9 +2706,7 @@
         private System.Windows.Forms.CheckBox chkGameInfoTextShadow;
         private System.Windows.Forms.Button btnClearGameInfoFont;
         private System.Windows.Forms.Button btnGameInfoFont;
-        private System.Windows.Forms.GroupBox groupBox5;
         private System.Windows.Forms.ComboBox cboLanguage;
-        private System.Windows.Forms.Label label11;
         private System.Windows.Forms.CheckBox chkShowDifficulty;
         private System.Windows.Forms.CheckBox chkShowGameName;
         private System.Windows.Forms.ComboBox cboGameInfoPosition;

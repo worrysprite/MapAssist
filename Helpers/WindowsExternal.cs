@@ -1,10 +1,29 @@
 ﻿using System;
 using System.Runtime.InteropServices;
+using System.Windows;
 
 namespace MapAssist.Helpers
 {
     public static class WindowsExternal
     {
+        public struct Rect
+        {
+            public int Left { get; set; }
+            public int Top { get; set; }
+            public int Right { get; set; }
+            public int Bottom { get; set; }
+
+            public int Width 
+            {
+                get { return Right - Left; }
+            }
+
+            public int Height
+            {
+                get { return Bottom - Top; }
+            }
+        }
+
         [DllImport("kernel32.dll", SetLastError = true)]
         public static extern IntPtr OpenProcess(
             uint processAccess,
@@ -98,11 +117,40 @@ namespace MapAssist.Helpers
         [DllImport("user32.dll", SetLastError = true)]
         public static extern uint GetWindowThreadProcessId(IntPtr hWnd, out uint processId);
 
-        [System.Runtime.InteropServices.DllImport("user32.dll")]
+        [DllImport("user32.dll")]
+        public static extern bool GetWindowRect(IntPtr hwnd, ref Rect rectangle);
+
+        [DllImport("user32.dll")]
         public static extern bool PostMessage(IntPtr hWnd, uint Msg, int wParam, int lParam);
+
+        //This is a replacement for Cursor.Position in WinForms
+        [DllImport("user32.dll")]
+        static extern bool SetCursorPos(int x, int y);
+
+        [DllImport("user32.dll")]
+        public static extern void mouse_event(int dwFlags, int dx, int dy, int cButtons, int dwExtraInfo);
+
+        [DllImport("user32.dll")]
+        public static extern int SetForegroundWindow(IntPtr hWnd);
 
         const uint WM_KEYDOWN = 0x0100;
         const int VK_ESCAPE = 0x1B;
         public static void SendEscapeKey(IntPtr hWnd) => PostMessage(hWnd, WM_KEYDOWN, VK_ESCAPE, 0);
+
+        public static Rect GetWindowRect(IntPtr hWnd)
+        {
+            var windowRec = new Rect();
+            GetWindowRect(hWnd, ref windowRec);
+            return windowRec;
+        }
+
+        public const int MOUSEEVENTF_LEFTDOWN = 0x02;
+        public const int MOUSEEVENTF_LEFTUP = 0x04;
+        public static void LeftMouseClick(int xpos, int ypos)
+        {
+            SetCursorPos(xpos, ypos);
+            mouse_event(MOUSEEVENTF_LEFTDOWN, xpos, ypos, 0, 0);
+            mouse_event(MOUSEEVENTF_LEFTUP, xpos, ypos, 0, 0);
+        }
     }
 }

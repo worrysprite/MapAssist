@@ -21,16 +21,13 @@ namespace MapAssist.Helpers
 
         private static bool _firstMemoryRead = true;
         private static bool _errorThrown = false;
+        private static long lastUpdate = 0;
+        private static GameData _gameData;
+        private static readonly object _lock = new object();
 
-        public static GameData GetGameData()
+        private static GameData ReadGameData()
         {
-            if (!MapAssistConfiguration.Loaded.RenderingConfiguration.StickToLastGameWindow && !GameManager.IsGameInForeground)
-            {
-                return null;
-            }
-
             var processContext = GameManager.GetProcessContext();
-
             if (processContext == null)
             {
                 return null;
@@ -386,6 +383,20 @@ namespace MapAssist.Helpers
                     LastNpcInteracted = lastNpcInteracted,
                     ProcessId = _currentProcessId
                 };
+            }
+        }
+
+        public static GameData GetGameData()
+        {
+            lock (_lock)
+            {
+                var now = DateTime.Now.Ticks;
+                if (now - lastUpdate >= TimeSpan.TicksPerMillisecond * 10)
+                {
+                    _gameData = ReadGameData();
+                    lastUpdate = now;
+                }
+                return _gameData;
             }
         }
 

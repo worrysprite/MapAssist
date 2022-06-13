@@ -13,9 +13,13 @@ namespace MapAssist.Helpers
 
         public (GameData, AreaData, bool) Get()
         {
-            var gameData = GameMemory.GetGameData();
+            GameData gameData = null;
             var changed = false;
 
+            if (MapAssistConfiguration.Loaded.RenderingConfiguration.StickToLastGameWindow || GameManager.IsGameInForeground)
+            {
+                gameData = GameMemory.GetGameData();
+            }
             if (gameData != null)
             {
                 if (gameData.HasGameChanged(_gameData))
